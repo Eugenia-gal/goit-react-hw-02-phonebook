@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import initialContacts from 'Data/contacts.json';
+import Container from 'Components/Container';
 import Form from 'Components/Form';
 import shortid from 'shortid';
 import ContactList from 'Components/ContactList';
 import Filter from 'Components/Filter';
+import initialContacts from 'Data/contacts.json';
 
 class App extends Component {
   state = {
@@ -28,6 +29,12 @@ class App extends Component {
     }
   };
 
+  deleteContact = id => {
+    this.setState(oldState => ({
+      contacts: oldState.contacts.filter(contact => contact.id !== id),
+    }));
+  };
+
   filterContacts = e => {
     const { name, value } = e.target;
     this.setState({
@@ -42,13 +49,16 @@ class App extends Component {
     );
 
     return (
-      <div>
+      <Container>
         <h1>Phonebook</h1>
         <Form onSubmit={this.addContact} />
         <h2>Contacts</h2>
         <Filter value={this.state.filter} onChange={this.filterContacts} />
-        <ContactList contacts={visibleContacts} />
-      </div>
+        <ContactList
+          contacts={visibleContacts}
+          onDeleteContact={this.deleteContact}
+        />
+      </Container>
     );
   }
 }
