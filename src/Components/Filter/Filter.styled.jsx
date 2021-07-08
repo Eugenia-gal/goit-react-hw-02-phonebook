@@ -1,9 +1,9 @@
 import styled from '@emotion/styled/macro';
 
 const FilterContainer = styled.div`
-  background-color: tomato;
+  border: 1px dashed black;
   padding: 10px;
-  width: 200px;
+  width: 300px;
   border-radius: 3px;
 `;
 
